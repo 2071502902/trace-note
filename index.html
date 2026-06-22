@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="未竟本">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 <div class="app">
@@ -140,23 +140,7 @@ function safeFileName(name){return String(name||'报告').replace(/[\\/:*?"<>|]/
 function reportCategoriesForExport(scope){let a=state.aiAnalysis;if(!a||!a.categories?.length)return[];if(scope==='category'){let c=selectedCategory();return c?[c]:[]}return a.categories}
 function reportListHtml(arr){return arr&&arr.length?`<ol>${arr.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:'<p class="muted">暂无。</p>'}
 function reportDocHTML(scope){let a=state.aiAnalysis;if(!a)return'';let cats=reportCategoriesForExport(scope);let title=scope==='category'&&cats[0]?`未竟本 AI 分类报告 - ${cats[0].name}`:'未竟本 AI 分类报告 - 全部类别';let meta=`生成时间：${fmt(a.generatedAt)}　服务：${esc(a.provider)} / ${esc(a.model)}`;let body=cats.map(cat=>{let items=cat.item_ids.map(byId).filter(Boolean);let links=(cat.current_links||[]).map(x=>({task:byId(x.current_id),advice:x.advice})).filter(x=>x.task);return `<section class="cat"><h2>${esc(cat.name)}</h2><p class="reason"><b>分类依据：</b>${esc(cat.reason||'')}</p><h3>历程判断</h3><p>${esc(cat.process_summary||'暂无。')}</p><h3>可复用经验</h3>${reportListHtml(cat.experience)}<h3>下一步建议</h3>${reportListHtml(cat.next_advice)}<h3>关联当前事项</h3>${links.length?links.map(x=>`<div class="link"><b>${esc(x.task.text)}</b><br>${esc(x.advice)}</div>`).join(''):'<p class="muted">当前事项里暂时没有和这个类别强相关的内容。</p>'}<h3>该类别包含的已完成事项</h3>${items.length?`<table><thead><tr><th>完成时间</th><th>事项内容</th></tr></thead><tbody>${items.map(t=>`<tr><td>${fmt(t.completedAt||t.updatedAt)}</td><td>${esc(t.text)}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">暂无。</p>'}</section>`}).join('');return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:#2f2d29;line-height:1.75;margin:48px;background:#fff}h1{font-size:26px;margin:0 0 10px}h2{font-size:22px;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid #ddd}h3{font-size:16px;margin:18px 0 8px}.meta,.muted,.reason{color:#6f675c}.overview{border:1px solid #e2d8ca;background:#fffaf2;border-radius:12px;padding:12px 14px;margin:16px 0 24px}.cat{page-break-inside:avoid;margin-bottom:28px}.link{border-left:3px solid #b7aa98;padding-left:12px;margin:8px 0}table{border-collapse:collapse;width:100%;margin-top:8px}th,td{border:1px solid #ddd;padding:8px 10px;vertical-align:top}th{background:#f5f1e9;text-align:left}ol{padding-left:24px}@media print{body{margin:24mm}.cat{page-break-inside:auto}}</style>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2f2d29">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="未竟本">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-</head><body><h1>${esc(title)}</h1><div class="meta">${meta}</div><div class="overview"><b>整体判断：</b>${esc(a.overview||'')}</div>${body}
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js').catch(err => {
-      console.warn('Service Worker 注册失败：', err);
-    });
-  });
-}
-</script>
-</body></html>`}
+</head><body><h1>${esc(title)}</h1><div class="meta">${meta}</div><div class="overview"><b>整体判断：</b>${esc(a.overview||'')}</div>${body}</body></html>`}
 function exportReportWord(scope='category'){if(!state.aiAnalysis){alert('请先生成 AI 分类报告。');return}let cats=reportCategoriesForExport(scope);if(!cats.length){alert('没有可导出的分类。');return}let html=reportDocHTML(scope);let blob=new Blob(['\ufeff',html],{type:'application/msword;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`TraceNote_AI_${scope==='category'?safeFileName(cats[0].name):'全部分类'}.doc`;a.click();URL.revokeObjectURL(a.href)}
 function exportReportPDF(scope='category'){if(!state.aiAnalysis){alert('请先生成 AI 分类报告。');return}let cats=reportCategoriesForExport(scope);if(!cats.length){alert('没有可导出的分类。');return}let html=reportDocHTML(scope);let w=window.open('','_blank');if(!w){alert('浏览器拦截了弹窗，请允许弹窗后重试。');return}w.document.open();w.document.write(html);w.document.close();setTimeout(()=>{w.focus();w.print()},350)}
 
