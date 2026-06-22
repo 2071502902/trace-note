@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未竟本 Trace Note</title>
+<style>
+:root{--bg:#f5f1e9;--card:#fffdf8;--ink:#2f2d29;--muted:#756e64;--line:#e2d8ca;--soft:#f2eadf;--danger:#a45b45;--good:#5c7657;--shadow:0 24px 60px rgba(45,35,20,.10);--radius:24px}*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;background:radial-gradient(circle at top left,#fffaf0 0,#f5f1e9 38%,#eee6d8 100%);font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink)}button,input,select,textarea{font-family:inherit}.app{height:100vh;display:grid;grid-template-columns:240px 1fr;gap:18px;padding:22px}.side,.main{background:rgba(255,253,248,.82);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.side{padding:22px;display:flex;flex-direction:column}.brand{border-bottom:1px solid var(--line);padding-bottom:22px}.brand-cn{font-size:30px;letter-spacing:.22em}.brand-en{font-size:12px;letter-spacing:.28em;color:var(--muted);margin-top:6px}.nav{display:flex;flex-direction:column;gap:10px;margin-top:24px}.nav button{border:0;background:transparent;border-radius:16px;padding:14px;text-align:left;color:var(--muted);cursor:pointer;font-size:15px;display:flex;justify-content:space-between;align-items:center}.nav button.active{background:var(--ink);color:#fff}.count{border:1px solid currentColor;border-radius:999px;padding:1px 8px;font-size:12px;opacity:.75}.note{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12px;line-height:1.8}.main{height:calc(100vh - 44px);display:flex;flex-direction:column;overflow:hidden}.header{padding:26px 30px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px}.title h1{margin:0 0 8px;font-size:28px;font-weight:500}.title p{margin:0;color:var(--muted);font-size:14px}.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:start;justify-content:flex-end}.pill,.btn{border:1px solid var(--line);background:#fffaf2;border-radius:999px;padding:10px 14px;color:var(--ink);font-size:13px;cursor:pointer}.pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.content{flex:1;min-height:0;padding:22px 30px 28px;display:flex;flex-direction:column;gap:16px}.add{display:grid;grid-template-columns:1fr auto;gap:12px;background:#fffaf2;border:1px solid var(--line);border-radius:22px;padding:12px}.add input{border:0;background:transparent;outline:none;font-size:17px;padding:8px 12px}.add button{background:var(--ink);color:#fff;border:0;border-radius:16px;padding:0 24px;cursor:pointer}.search{display:flex;gap:12px;align-items:center}.search input{flex:1;border:1px solid var(--line);background:#fffdf9;border-radius:999px;padding:12px 16px;outline:none}.hint{color:var(--muted);font-size:13px;white-space:nowrap}.box{flex:1;min-height:0;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.38);overflow:hidden;display:flex;flex-direction:column}.box-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.list{flex:1;min-height:0;overflow-y:auto;padding:14px}.task{background:#fffdf9;border:1px solid #e6ddd0;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:0 6px 18px rgba(44,34,23,.04)}.task-main{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}.check{width:24px;height:24px;border-radius:50%;border:1.5px solid #b5aa9b;background:#fffdf9;cursor:pointer;color:#fff;display:grid;place-items:center}.checked .check{background:var(--ink);border-color:var(--ink)}.checked .text{text-decoration:line-through;text-decoration-thickness:1.5px;color:#8c857a}.text{font-size:16px;line-height:1.55;word-break:break-word}.meta{font-size:12px;color:var(--muted);margin-top:4px}.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.smallbtn{border:1px solid var(--line);background:#fff8ef;border-radius:999px;padding:7px 10px;font-size:12px;color:var(--muted);cursor:pointer}.smallbtn:hover{color:var(--ink);border-color:#c9b9a6}.danger:hover{color:var(--danger);border-color:#d5a391}.edit{display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-top:12px}.edit input{border:1px solid var(--line);border-radius:12px;padding:10px;outline:none}.confirm{margin-top:12px;padding:11px 12px;border-radius:14px;background:#f5eee5;border:1px dashed #d7c7b5;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:13px}.date-title{margin:18px 0 10px;color:var(--muted);font-size:13px}.empty{height:100%;display:grid;place-items:center;text-align:center;color:var(--muted);line-height:1.8}.muted{color:var(--muted)}
+.report{height:100%;min-height:0;overflow:hidden;display:grid;grid-template-rows:auto auto 1fr;gap:14px}.report-top,.panel,.settings .panel{background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:18px}.report-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.report-title h2{margin:0 0 8px;font-size:19px;font-weight:550}.report-title p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}.ai-status{font-size:13px;color:var(--muted);line-height:1.7}.report-body{min-height:0;display:grid;grid-template-columns:290px 1fr;gap:14px}.category-list{min-height:0;overflow-y:auto;padding:4px}.cat-card{width:100%;text-align:left;border:1px solid var(--line);background:#fffaf2;border-radius:18px;margin-bottom:10px;padding:14px;cursor:pointer;color:var(--ink)}.cat-card.active{background:var(--ink);color:#fff;border-color:var(--ink)}.cat-card .cat-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.cat-name{font-size:17px;font-weight:600}.cat-count{font-size:12px;border:1px solid currentColor;border-radius:999px;padding:2px 8px;opacity:.8}.cat-reason{font-size:12px;color:inherit;opacity:.72;line-height:1.55;margin-top:8px}.analysis{min-height:0;overflow-y:auto;padding:2px 4px 8px}.analysis-card{background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:20px;margin-bottom:12px}.analysis-card h3{margin:0 0 12px;font-size:18px;font-weight:560}.analysis-card p{margin:0;color:#5f594f;line-height:1.8}.steps{display:grid;gap:10px}.step{border-top:1px solid #eee5d9;padding-top:10px;line-height:1.75;color:#5f594f}.step:first-child{border-top:0;padding-top:0}.event{border:1px solid #eadfce;background:#fffaf2;border-radius:16px;padding:12px;margin-bottom:10px}.event-time{font-size:12px;color:var(--muted);margin-bottom:5px}.event-text{line-height:1.65}.current-link{border-left:3px solid #b7aa98;padding-left:12px;margin:10px 0;line-height:1.7;color:#5f594f}.codebox{white-space:pre-wrap;background:#fffaf2;border:1px solid #eadfce;border-radius:16px;padding:14px;color:#5f594f;line-height:1.75;max-height:240px;overflow:auto}.chipline{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#f8f2e9;border-radius:999px;padding:7px 11px;font-size:13px;color:#5f594f}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.report-actions .btn{background:#fffaf2}.export-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px}.form{display:grid;gap:14px;max-width:860px}.field{display:grid;gap:7px}.field label{font-size:13px;color:var(--muted)}.field input,.field select,.field textarea{border:1px solid var(--line);background:#fffdf9;border-radius:14px;padding:12px 14px;outline:none;font-size:14px}.field textarea{min-height:92px;resize:vertical}.warn{background:#fff4e8;border:1px solid #ead0b6;border-radius:18px;padding:14px;color:#715f4d;line-height:1.7;font-size:13px}.spinner{display:inline-block;width:12px;height:12px;border:2px solid #cfc3b4;border-top-color:#2f2d29;border-radius:50%;animation:spin 1s linear infinite;vertical-align:-2px;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.app{grid-template-columns:1fr;padding:12px}.side{padding:16px}.nav{flex-direction:row;flex-wrap:wrap;margin-top:14px}.nav button{flex:1;min-width:130px}.note{display:none}.main{height:calc(100vh - 220px)}.header{padding:18px;flex-direction:column}.content{padding:14px}.add{grid-template-columns:1fr}.add button{height:44px}.report-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}.category-list{display:flex;overflow-x:auto;overflow-y:hidden}.cat-card{min-width:210px}.report-top{flex-direction:column}.analysis{min-height:280px}}
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2f2d29">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="未竟本">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="brand-cn">未竟本</div><div class="brand-en">TRACE NOTE</div></div>
+    <nav class="nav">
+      <button id="nav-current" onclick="setPage('current')">当前事项 <span id="c1" class="count">0</span></button>
+      <button id="nav-completed" onclick="setPage('completed')">已完成 <span id="c2" class="count">0</span></button>
+      <button id="nav-report" onclick="setPage('report')">AI 报告 <span class="count">Trace</span></button>
+      <button id="nav-settings" onclick="setPage('settings')">AI 设置 <span class="count">API</span></button>
+    </nav>
+    <div class="note">完成不是消失。<br>它会被分类、关联、沉淀成下一步的经验。</div>
+  </aside>
+  <main class="main">
+    <header class="header">
+      <div class="title"><h1 id="title">当前事项</h1><p id="sub">按记录顺序向下生长，像一本真正的记录本。</p></div>
+      <div class="tools" id="tools">
+        <button id="allBtn" class="pill" onclick="setView('all')">全部</button>
+        <button id="dateBtn" class="pill" onclick="setView('date')">按日期</button>
+        <button class="btn" onclick="exportData()">导出</button>
+        <label class="btn" for="importFile">导入</label><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)">
+      </div>
+    </header>
+    <section id="content" class="content"></section>
+  </main>
+</div>
+<script>
+const KEY='trace-note-simple-v10';
+const OLD_KEYS=['trace-note-simple-v8','trace-note-simple-v7','trace-note-simple-v6','trace-note-simple-v5'];
+const AI_KEY='trace-note-ai-settings-v1';
+let state={page:'current',view:'all',search:'',tasks:[],aiAnalysis:null,selectedCategory:null};
+let ai={provider:'deepseek',mode:'direct',apiKey:'',baseURL:'https://api.deepseek.com',model:'deepseek-chat',proxyURL:'http://127.0.0.1:8765/api/chat'};
+let pending=null,editing=null;
+function now(){return new Date().toISOString()}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function pad(n){return String(n).padStart(2,'0')}
+function fmt(x){let d=new Date(x);return `${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`}
+function day(x){let d=new Date(x);return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`}
+function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function normalizeText(v){
+  if(typeof v==='string')return v;
+  if(v==null)return '';
+  if(typeof v==='number'||typeof v==='boolean')return String(v);
+  if(typeof v==='object'){
+    for(const k of ['text','title','content','value','name','task','label']){
+      if(typeof v[k]==='string')return v[k];
+    }
+    try{
+      const vals=Object.values(v).filter(x=>typeof x==='string'&&x.trim());
+      if(vals.length)return vals.join(' ');
+    }catch(e){}
+  }
+  return '';
+}
+function normalizeTask(t){
+  t=t||{};
+  return {
+    id:t.id||uid(),
+    text:normalizeText(t.text||t.title||t.content||t.value||t.name||t.task).trim(),
+    createdAt:t.createdAt||t.created_at||t.time||now(),
+    updatedAt:t.updatedAt||t.updated_at||t.createdAt||now(),
+    checked:!!t.checked,
+    archived:!!t.archived,
+    completedAt:t.completedAt||t.completed_at||null
+  };
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function saveAI(){localStorage.setItem(AI_KEY,JSON.stringify(ai))}
+function load(){
+  try{
+    let raw=localStorage.getItem(KEY);
+    if(!raw){for(const k of OLD_KEYS){raw=localStorage.getItem(k);if(raw)break}}
+    if(raw){let old=JSON.parse(raw);state={...state,...old};if(old.aiReport&&!old.aiAnalysis){state.aiAnalysis=null}}
+    let a=localStorage.getItem(AI_KEY);if(a)ai={...ai,...JSON.parse(a)};
+  }catch(e){}
+  state.tasks=(state.tasks||[]).map(normalizeTask).filter(t=>t.text);
+  render();
+}
+function active(){return state.tasks.filter(t=>!t.archived).sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt))}
+function done(){return state.tasks.filter(t=>t.archived).sort((a,b)=>new Date(a.completedAt||a.updatedAt)-new Date(b.completedAt||b.updatedAt))}
+function filtered(list){let q=state.search.trim().toLowerCase();return q?list.filter(t=>normalizeText(t.text).toLowerCase().includes(q)):list}
+function invalidateAI(){state.aiAnalysis=null;state.selectedCategory=null}
+function setPage(p){state.page=p;pending=null;editing=null;save();render()}
+function setView(v){state.view=v;save();render()}
+function addTask(){let input=document.getElementById('newTask');let text=input.value.trim();if(!text)return;state.tasks.push({id:uid(),text,createdAt:now(),updatedAt:now(),checked:false,archived:false,completedAt:null});input.value='';invalidateAI();save();render();setTimeout(()=>document.getElementById('newTask')?.focus(),0)}
+function toggleCheck(id){let t=state.tasks.find(x=>x.id===id);if(t){t.checked=!t.checked;t.updatedAt=now();save();render()}}
+function startEdit(id){editing=id;pending=null;render()}
+function cancelEdit(){editing=null;render()}
+function saveEdit(id){let input=document.getElementById('edit-'+id);let text=input.value.trim();let t=state.tasks.find(x=>x.id===id);if(t&&text){t.text=text;t.updatedAt=now();editing=null;invalidateAI();save();render()}}
+function askDelete(id){pending=id;editing=null;render()}
+function cancelDelete(){pending=null;render()}
+function confirmDelete(id){let t=state.tasks.find(x=>x.id===id);if(t){t.archived=true;t.completedAt=now();t.updatedAt=now();pending=null;invalidateAI();save();render()}}
+function restoreTask(id){let t=state.tasks.find(x=>x.id===id);if(t){t.archived=false;t.completedAt=null;t.updatedAt=now();invalidateAI();save();render()}}
+function taskHtml(t,mode){let isEdit=editing===t.id, isPending=pending===t.id;return `<div class="task ${t.checked?'checked':''}"><div class="task-main"><button class="check" onclick="toggleCheck('${t.id}')">${t.checked?'✓':''}</button><div><div class="text">${esc(t.text)}</div><div class="meta">记录于 ${fmt(t.createdAt)}${t.completedAt?' · 归档于 '+fmt(t.completedAt):''}</div></div><div class="acts">${mode==='done'?`<button class="smallbtn" onclick="restoreTask('${t.id}')">恢复</button>`:`<button class="smallbtn" onclick="startEdit('${t.id}')">修改</button><button class="smallbtn danger" onclick="askDelete('${t.id}')">删去</button>`}</div></div>${isEdit?`<div class="edit"><input id="edit-${t.id}" value="${esc(t.text)}" onkeydown="if(event.key==='Enter')saveEdit('${t.id}')"><button class="smallbtn" onclick="saveEdit('${t.id}')">保存</button><button class="smallbtn" onclick="cancelEdit()">取消</button></div>`:''}${isPending?`<div class="confirm"><span>确认把这条事项移入「已完成」吗？</span><span><button class="smallbtn danger" onclick="confirmDelete('${t.id}')">确认删去</button><button class="smallbtn" onclick="cancelDelete()">再想想</button></span></div>`:''}</div>`}
+function listHtml(list,mode){list=filtered(list);if(!list.length)return `<div class="empty"><div>${state.search?'没有找到匹配事项。':'这里还是空的。'}</div></div>`;if(state.view==='date'){let groups={};list.forEach(t=>{let k=day(mode==='done'?(t.completedAt||t.updatedAt):t.createdAt);(groups[k]??=[]).push(t)});return Object.entries(groups).map(([k,arr])=>`<div class="date-title">${k}</div>${arr.map(t=>taskHtml(t,mode)).join('')}`).join('')}return list.map(t=>taskHtml(t,mode)).join('')}
+function listPageHtml(mode){let isCurrent=mode==='current';return `${isCurrent?`<div class="add"><input id="newTask" placeholder="写下一件未完成的事..." onkeydown="if(event.key==='Enter')addTask()"><button onclick="addTask()">加入</button></div>`:''}<div class="search"><input placeholder="搜索事项" value="${esc(state.search)}" oninput="state.search=this.value;save();render()"><span class="hint">${isCurrent?'先记录，再完成。':'已完成会成为 AI 分析素材。'}</span></div><div class="box"><div class="box-head"><span>${isCurrent?'当前列表':'已完成存储区'}</span><span>${filtered(isCurrent?active():done()).length} 条</span></div><div class="list">${listHtml(isCurrent?active():done(),isCurrent?'current':'done')}</div></div>`}
+function currentHtml(){return listPageHtml('current')}
+function completedHtml(){return listPageHtml('completed')}
+
+function providerDefault(p){if(p==='deepseek')return{baseURL:'https://api.deepseek.com',model:'deepseek-chat'};if(p==='doubao')return{baseURL:'https://ark.cn-beijing.volces.com/api/v3',model:''};return{baseURL:ai.baseURL,model:ai.model}}
+function setProvider(p){let d=providerDefault(p);ai.provider=p;ai.baseURL=d.baseURL;ai.model=d.model;render()}
+function saveAISettings(){ai.provider=document.getElementById('aiProvider').value;ai.mode=document.getElementById('aiMode').value;ai.apiKey=document.getElementById('aiKey').value.trim();ai.baseURL=document.getElementById('aiBase').value.trim().replace(/\/$/,'');ai.model=document.getElementById('aiModel').value.trim();ai.proxyURL=document.getElementById('aiProxy').value.trim();saveAI();alert('AI 设置已保存');render()}
+function settingsHtml(){return `<div class="settings" style="height:100%;overflow-y:auto"><div class="panel"><h2 style="margin:0 0 14px;font-weight:500">接入真实 AI</h2><div class="form"><div class="warn">API Key 只保存在你当前浏览器的 localStorage 里。个人原型可以这样测试；正式上线时应把 Key 放在后端服务器中。</div><div class="field"><label>模型服务</label><select id="aiProvider" onchange="setProvider(this.value)"><option value="deepseek" ${ai.provider==='deepseek'?'selected':''}>DeepSeek</option><option value="doubao" ${ai.provider==='doubao'?'selected':''}>豆包 / 火山方舟 Ark</option></select></div><div class="field"><label>请求方式</label><select id="aiMode"><option value="direct" ${ai.mode==='direct'?'selected':''}>浏览器直连 API</option><option value="proxy" ${ai.mode==='proxy'?'selected':''}>本地代理 / 后端代理</option></select></div><div class="field"><label>API Key</label><input id="aiKey" type="password" value="${esc(ai.apiKey)}" placeholder="粘贴你的 API Key"></div><div class="field"><label>Base URL</label><input id="aiBase" value="${esc(ai.baseURL)}"></div><div class="field"><label>Model / 接入点 ID</label><input id="aiModel" value="${esc(ai.model)}" placeholder="DeepSeek 可用 deepseek-chat；豆包请填方舟控制台里的接入点 ID"></div><div class="field"><label>代理地址</label><input id="aiProxy" value="${esc(ai.proxyURL)}"></div><div><button class="btn primary" onclick="saveAISettings()">保存设置</button><button class="btn" onclick="setPage('report')">回到 AI 报告</button></div></div></div></div>`}
+
+function itemPayload(){return{completed:done().map(t=>({id:t.id,text:t.text,createdAt:t.createdAt,completedAt:t.completedAt||t.updatedAt,checked:t.checked})),current:active().map(t=>({id:t.id,text:t.text,createdAt:t.createdAt,checked:t.checked}))}}
+function buildAIPrompt(){const data=itemPayload();return `你是 Trace Note 的任务复盘 AI。你要做的不是词频统计，而是把已完成事项按真实语义分类，并对用户选中的类别提供有用的历程与经验建议。\n\n请严格只输出 JSON，不要 Markdown，不要解释。JSON 结构必须如下：\n{\n  "overview":"一句话说明用户目前已沉淀出的主要行动方向",\n  "categories":[\n    {\n      "id":"稳定的英文小写id，例如 paper 或 chores",\n      "name":"中文类别名，例如 论文 或 日常家务",\n      "reason":"为什么这些事项归为一类，1句话",\n      "item_ids":["已完成事项id"],\n      "process_summary":"这个类别中，用户从哪些动作推进到哪些结果，形成了什么历程，2-4句话",\n      "experience":["切实可复用经验1","切实可复用经验2","切实可复用经验3"],\n      "next_advice":["下一步可执行建议1","下一步可执行建议2","下一步可执行建议3"],\n      "current_links":[{"current_id":"当前事项id","advice":"该当前事项可如何复用本类别经验"}]\n    }\n  ]\n}\n\n分类要求：\n1. 必须按语义合并，不要把数字、序号、无意义短词当类别。\n2. 例如“写论文、改论文、投稿”应归为“论文”；“买菜、做饭、打扫、洗衣”应归为“日常家务”。\n3. 一个已完成事项原则上只进入一个最合适类别。\n4. 类别数量控制在 2-6 个。\n5. 建议必须具体，避免“保持努力”“提高效率”这类空话。\n6. 不要编造用户没有记录过的事项。\n\n数据：\n${JSON.stringify(data,null,2)}`}
+function extractJSON(text){let s=String(text||'').trim();s=s.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/```$/,'').trim();try{return JSON.parse(s)}catch(e){}let start=s.indexOf('{'),end=s.lastIndexOf('}');if(start>=0&&end>start){try{return JSON.parse(s.slice(start,end+1))}catch(e){}}throw new Error('AI 返回内容不是可解析 JSON')}
+function validateAnalysis(obj){let ids=new Set(done().map(t=>t.id));let currentIds=new Set(active().map(t=>t.id));let cats=Array.isArray(obj.categories)?obj.categories:[];cats=cats.map((c,i)=>{let itemIds=(c.item_ids||[]).filter(id=>ids.has(id));let links=Array.isArray(c.current_links)?c.current_links.filter(x=>x&&currentIds.has(x.current_id)):[];return{id:String(c.id||('cat'+i)).replace(/[^a-zA-Z0-9_-]/g,'')||('cat'+i),name:String(c.name||'未分类'),reason:String(c.reason||''),item_ids:itemIds,process_summary:String(c.process_summary||''),experience:Array.isArray(c.experience)?c.experience.map(String).filter(Boolean).slice(0,5):[],next_advice:Array.isArray(c.next_advice)?c.next_advice.map(String).filter(Boolean).slice(0,5):[],current_links:links.map(x=>({current_id:x.current_id,advice:String(x.advice||'')}))}}).filter(c=>c.item_ids.length);if(!cats.length)throw new Error('AI 没有返回有效分类');return{overview:String(obj.overview||'已完成事项已经可以作为经验素材。'),categories:cats,generatedAt:now(),provider:ai.provider,model:ai.model,source:'ai'}}
+function words(text){return String(text).toLowerCase().replace(/[，。！？、；：,.!?;:()（）【】\[\]"']/g,' ').split(/\s+/).filter(Boolean)}
+function localType(text){let s=String(text).toLowerCase();let rules=[['paper','论文',['论文','投稿','改论文','写论文','文献','摘要','引言','discussion','results','manuscript','journal','返修'],['把论文任务拆成「素材/草稿/修改/提交」四步，每一步只保留一个明确完成标准。','投稿类任务不要和写作同日压缩完成，先完成内容质量，再处理格式与提交。','每次改完论文后记录一句“本轮解决的问题”，便于下一轮复用判断标准。']],['chores','日常家务',['家务','洗衣','做饭','买菜','打扫','清洁','收拾','厨房','房间','快递','取快递','水电'],['把家务类任务绑定固定时间或地点，例如饭后清理、出门顺手取快递。','家务适合写成 10 分钟内能完成的一句话，避免变成长期负担。','把重复家务合并成固定清单，减少每天重新决策的成本。']],['product','产品设计',['app','产品','原型','界面','按钮','页面','交互','设计','用户','报告','ai'],['先把核心使用路径跑通，再做视觉细节；每次迭代只解决一个真实痛点。','记录用户反馈时要保留原句，因为原句往往比抽象需求更准确。','功能不要堆叠，优先留下能支持产品独特点的交互。']],['data','数据分析',['数据','代码','python','html','json','excel','图表','统计','分析','powerbi'],['数据任务先确认输入、输出和判断标准，再写代码。','把可复现步骤保存下来，下一次同类分析可以直接复用。','图表类任务要先确定要回答的问题，而不是先美化形式。']],['communication','沟通提交',['提交','发送','联系','邮箱','汇报','开会','申请','材料','通知'],['沟通类任务适合提前写好最小可发送版本，再逐步完善。','提交前建立固定检查项：对象、附件、截止时间、措辞。','需要别人反馈的事项要记录下一步等待对象和预期时间。']]];for(const [id,name,keys,exp] of rules){if(keys.some(k=>s.includes(k)))return{id,name,reason:`包含「${keys.find(k=>s.includes(k))}」等相关表达。`,exp}}return{id:'general',name:'一般推进',reason:'暂未识别出更具体主题。',exp:['把事项写得更具体：对象 + 动作 + 完成标准。','如果一条事项长期停留，尝试拆成 15 分钟内能开始的一小步。','完成后补充一句结果或经验，AI 报告会更有用。']}}
+function localAnalysis(){let grouped={};done().forEach(t=>{let typ=localType(t.text);if(!grouped[typ.id])grouped[typ.id]={id:typ.id,name:typ.name,reason:typ.reason,item_ids:[],experience:typ.exp,next_advice:[],current_links:[],_texts:[]};grouped[typ.id].item_ids.push(t.id);grouped[typ.id]._texts.push(t.text)});let cats=Object.values(grouped).map(c=>{let currentLinks=[];active().forEach(cur=>{let curType=localType(cur.text);if(curType.id===c.id)currentLinks.push({current_id:cur.id,advice:`这个当前事项与「${c.name}」类历史记录相关，建议先复用该类别的固定步骤，再补充新的变化。`})});return{...c,process_summary:`你在「${c.name}」类中已经完成了 ${c.item_ids.length} 条事项。可以把这些完成记录看作一次从记录、推进到归档的历程，而不是单独的待办。`,next_advice:c.experience.slice(0,3),current_links:currentLinks}});return{overview:'已完成事项已被整理为可选择的经验类别。',categories:cats,generatedAt:now(),provider:'本地预览',model:'local-rule',source:'local'}}
+async function runAIAnalysis(){if(!done().length){alert('还没有已完成事项，先把几条事项移入「已完成」。');return}if(!ai.apiKey||!ai.model){state.page='settings';save();render();alert('请先填写 API Key 和 Model / 接入点 ID。');return}const btn=document.getElementById('aiRunBtn'),status=document.getElementById('aiStatus');if(btn)btn.disabled=true;if(status)status.innerHTML='<span class="spinner"></span>AI 正在分类事项，并生成结构化报告...';const messages=[{role:'system',content:'你是一个任务复盘与经验提炼助手。你必须输出可解析 JSON。'},{role:'user',content:buildAIPrompt()}];try{let data;if(ai.mode==='proxy'){let r=await fetch(ai.proxyURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({provider:ai.provider,baseURL:ai.baseURL,apiKey:ai.apiKey,model:ai.model,messages})});if(!r.ok)throw new Error('代理请求失败：HTTP '+r.status+' '+await r.text());data=await r.json()}else{let url=ai.baseURL.replace(/\/$/,'')+'/chat/completions';let r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ai.apiKey},body:JSON.stringify({model:ai.model,messages,temperature:0.1,stream:false,response_format:{type:'json_object'}})});if(!r.ok)throw new Error('API 请求失败：HTTP '+r.status+' '+await r.text());data=await r.json()}let content=data.choices?.[0]?.message?.content||data.output_text||data.content||'';let parsed=validateAnalysis(extractJSON(content));state.aiAnalysis=parsed;state.selectedCategory=parsed.categories[0]?.id||null;save();render()}catch(e){if(status)status.innerHTML='AI 调用或解析失败：'+esc(e.message)+'<br>可以检查 API 设置，或先点“本地预览分类”查看交互效果。';if(btn)btn.disabled=false}}
+function runLocalPreview(){if(!done().length){alert('还没有已完成事项。');return}let parsed=localAnalysis();state.aiAnalysis=parsed;state.selectedCategory=parsed.categories[0]?.id||null;save();render()}
+function selectedCategory(){let a=state.aiAnalysis;if(!a||!a.categories?.length)return null;let found=a.categories.find(c=>c.id===state.selectedCategory);return found||a.categories[0]}
+function setCategory(id){state.selectedCategory=id;save();render()}
+function byId(id){return state.tasks.find(t=>t.id===id)}
+function reportHtml(){let d=done();if(!d.length)return `<div class="empty"><div>还没有可分析的已完成事项。<br>把事项移入「已完成」后，AI 会先分类，再按类别生成历程与经验建议。</div></div>`;let a=state.aiAnalysis;let cat=selectedCategory();return `<div class="report"><div class="report-top"><div class="report-title"><h2>AI 分类回馈</h2><p>先让 AI 把已完成事项分成真实类别；点击某个类别后，只分析这一类的历程、经验和下一步建议。</p><div id="aiStatus" class="ai-status">${a?`当前报告：${esc(a.provider)} / ${esc(a.model)} · ${fmt(a.generatedAt)}${a.source==='local'?' · 本地预览':''}`:'还没有生成结构化报告。'}</div>${a?`<div class="report-actions"><button class="btn" onclick="exportReportWord('all')">导出全部 Word</button><button class="btn" onclick="exportReportPDF('all')">导出全部 PDF</button></div><div class="export-note">也可以点左侧某个类别后，只导出该类别的报告。</div>`:''}</div><div class="ai-row"><button id="aiRunBtn" class="btn primary" onclick="runAIAnalysis()">AI 分类并生成报告</button><button class="btn" onclick="runLocalPreview()">本地预览分类</button><button class="btn" onclick="setPage('settings')">AI 设置</button></div></div>${a?`<div class="panel"><b>整体判断：</b><span class="muted">${esc(a.overview)}</span></div><div class="report-body"><div class="panel category-list">${a.categories.map(c=>`<button class="cat-card ${cat&&cat.id===c.id?'active':''}" onclick="setCategory('${c.id}')"><div class="cat-top"><span class="cat-name">${esc(c.name)}</span><span class="cat-count">${c.item_ids.length} 条</span></div><div class="cat-reason">${esc(c.reason)}</div></button>`).join('')}</div>${cat?categoryDetailHtml(cat):'<div class="panel empty">请选择一个类别。</div>'}</div>`:`<div class="empty"><div>点击「AI 分类并生成报告」。<br>它会把已完成事项分成类似「论文」「日常家务」这样的真实类别。</div></div>`}</div>`}
+function categoryDetailHtml(cat){let items=cat.item_ids.map(byId).filter(Boolean);let links=(cat.current_links||[]).map(x=>({task:byId(x.current_id),advice:x.advice})).filter(x=>x.task);return `<div class="analysis"><div class="analysis-card"><h3>${esc(cat.name)}｜历程判断</h3><p>${esc(cat.process_summary||'这个类别还没有形成足够清晰的历程。')}</p><div class="report-actions"><button class="btn" onclick="exportReportWord('category')">导出本类 Word</button><button class="btn" onclick="exportReportPDF('category')">导出本类 PDF</button></div></div><div class="analysis-card"><h3>可复用经验</h3><div class="steps">${(cat.experience&&cat.experience.length?cat.experience:['继续完成更多同类事项后，AI 会提炼更具体的经验。']).map(x=>`<div class="step">${esc(x)}</div>`).join('')}</div></div><div class="analysis-card"><h3>下一步建议</h3><div class="steps">${(cat.next_advice&&cat.next_advice.length?cat.next_advice:['把当前事项改写成更具体的一句话：对象 + 动作 + 完成标准。']).map(x=>`<div class="step">${esc(x)}</div>`).join('')}</div></div><div class="analysis-card"><h3>关联当前事项</h3>${links.length?links.map(x=>`<div class="current-link"><b>${esc(x.task.text)}</b><br>${esc(x.advice)}</div>`).join(''):'<p>当前事项里暂时没有和这个类别强相关的内容。</p>'}</div><div class="analysis-card"><h3>该类别包含的已完成事项</h3>${items.map(t=>`<div class="event"><div class="event-time">${fmt(t.completedAt||t.updatedAt)}</div><div class="event-text">${esc(t.text)}</div></div>`).join('')}</div></div>`}
+
+function plainTextFromHtml(s){let d=document.createElement('div');d.innerHTML=s;return d.textContent||d.innerText||''}
+function safeFileName(name){return String(name||'报告').replace(/[\\/:*?"<>|]/g,'_').replace(/\s+/g,'_').slice(0,40)||'报告'}
+function reportCategoriesForExport(scope){let a=state.aiAnalysis;if(!a||!a.categories?.length)return[];if(scope==='category'){let c=selectedCategory();return c?[c]:[]}return a.categories}
+function reportListHtml(arr){return arr&&arr.length?`<ol>${arr.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:'<p class="muted">暂无。</p>'}
+function reportDocHTML(scope){let a=state.aiAnalysis;if(!a)return'';let cats=reportCategoriesForExport(scope);let title=scope==='category'&&cats[0]?`未竟本 AI 分类报告 - ${cats[0].name}`:'未竟本 AI 分类报告 - 全部类别';let meta=`生成时间：${fmt(a.generatedAt)}　服务：${esc(a.provider)} / ${esc(a.model)}`;let body=cats.map(cat=>{let items=cat.item_ids.map(byId).filter(Boolean);let links=(cat.current_links||[]).map(x=>({task:byId(x.current_id),advice:x.advice})).filter(x=>x.task);return `<section class="cat"><h2>${esc(cat.name)}</h2><p class="reason"><b>分类依据：</b>${esc(cat.reason||'')}</p><h3>历程判断</h3><p>${esc(cat.process_summary||'暂无。')}</p><h3>可复用经验</h3>${reportListHtml(cat.experience)}<h3>下一步建议</h3>${reportListHtml(cat.next_advice)}<h3>关联当前事项</h3>${links.length?links.map(x=>`<div class="link"><b>${esc(x.task.text)}</b><br>${esc(x.advice)}</div>`).join(''):'<p class="muted">当前事项里暂时没有和这个类别强相关的内容。</p>'}<h3>该类别包含的已完成事项</h3>${items.length?`<table><thead><tr><th>完成时间</th><th>事项内容</th></tr></thead><tbody>${items.map(t=>`<tr><td>${fmt(t.completedAt||t.updatedAt)}</td><td>${esc(t.text)}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">暂无。</p>'}</section>`}).join('');return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:#2f2d29;line-height:1.75;margin:48px;background:#fff}h1{font-size:26px;margin:0 0 10px}h2{font-size:22px;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid #ddd}h3{font-size:16px;margin:18px 0 8px}.meta,.muted,.reason{color:#6f675c}.overview{border:1px solid #e2d8ca;background:#fffaf2;border-radius:12px;padding:12px 14px;margin:16px 0 24px}.cat{page-break-inside:avoid;margin-bottom:28px}.link{border-left:3px solid #b7aa98;padding-left:12px;margin:8px 0}table{border-collapse:collapse;width:100%;margin-top:8px}th,td{border:1px solid #ddd;padding:8px 10px;vertical-align:top}th{background:#f5f1e9;text-align:left}ol{padding-left:24px}@media print{body{margin:24mm}.cat{page-break-inside:auto}}</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2f2d29">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="未竟本">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+</head><body><h1>${esc(title)}</h1><div class="meta">${meta}</div><div class="overview"><b>整体判断：</b>${esc(a.overview||'')}</div>${body}
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(err => {
+      console.warn('Service Worker 注册失败：', err);
+    });
+  });
+}
+</script>
+</body></html>`}
+function exportReportWord(scope='category'){if(!state.aiAnalysis){alert('请先生成 AI 分类报告。');return}let cats=reportCategoriesForExport(scope);if(!cats.length){alert('没有可导出的分类。');return}let html=reportDocHTML(scope);let blob=new Blob(['\ufeff',html],{type:'application/msword;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`TraceNote_AI_${scope==='category'?safeFileName(cats[0].name):'全部分类'}.doc`;a.click();URL.revokeObjectURL(a.href)}
+function exportReportPDF(scope='category'){if(!state.aiAnalysis){alert('请先生成 AI 分类报告。');return}let cats=reportCategoriesForExport(scope);if(!cats.length){alert('没有可导出的分类。');return}let html=reportDocHTML(scope);let w=window.open('','_blank');if(!w){alert('浏览器拦截了弹窗，请允许弹窗后重试。');return}w.document.open();w.document.write(html);w.document.close();setTimeout(()=>{w.focus();w.print()},350)}
+
+
+function exportData(){let b=new Blob([JSON.stringify({tasks:state.tasks,aiAnalysis:state.aiAnalysis},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='trace-note-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);state.tasks=(Array.isArray(d)?d:(d.tasks||[])).map(normalizeTask).filter(t=>t.text);state.aiAnalysis=d.aiAnalysis||null;state.selectedCategory=state.aiAnalysis?.categories?.[0]?.id||null;save();render()}catch(err){alert('导入失败')}};r.readAsText(f);e.target.value=''}
+function render(){document.getElementById('c1').textContent=active().length;document.getElementById('c2').textContent=done().length;['current','completed','report','settings'].forEach(p=>document.getElementById('nav-'+p)?.classList.toggle('active',state.page===p));document.getElementById('allBtn').classList.toggle('active',state.view==='all');document.getElementById('dateBtn').classList.toggle('active',state.view==='date');document.getElementById('tools').style.display=(state.page==='report'||state.page==='settings')?'none':'flex';let titles={current:['当前事项','按记录顺序向下生长，像一本真正的记录本。'],completed:['已完成','被确认删去的事项不会消失，而是成为可追溯的经验资产。'],report:['AI 分类报告','先分类，再按类别追溯历程，沉淀经验。'],settings:['AI 设置','配置 DeepSeek 或豆包 / 火山方舟 API。']};let t=titles[state.page]||titles.current;document.getElementById('title').textContent=t[0];document.getElementById('sub').textContent=t[1];document.getElementById('content').innerHTML=state.page==='current'?currentHtml():state.page==='completed'?completedHtml():state.page==='report'?reportHtml():settingsHtml()}
+load();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(err => {
+      console.warn('Service Worker 注册失败：', err);
+    });
+  });
+}
+</script>
+</body>
+</html>
