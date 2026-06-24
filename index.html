@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Trace Note</title>
+  <title>Trace Note Mobile v39 Fixed</title>
   <style>
     :root{
       --bg:#f8f4ef;
@@ -260,13 +260,6 @@
     .confirm-actions .neutral-main{height:48px;border-radius:16px;border:1px solid var(--line);background:white;color:var(--text);font-weight:650;font-size:15px;}
 
   </style>
-
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#f8f4ef" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Trace Note" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
 <div class="app">
@@ -579,23 +572,13 @@ function buildReportHtml(scope){
   let cats=state.analysis.categories||[];
   if(scope==='category')cats=cats.filter(c=>c.name===state.selectedCategory);
   return `<html><head><meta charset="utf-8"><title>Trace Note Report</title><style>body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue','Segoe UI',Arial,sans-serif;line-height:1.7;color:#222;padding:32px}h1{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue','Segoe UI',Arial,sans-serif;font-weight:650;letter-spacing:-.02em}section{border-bottom:1px solid #ddd;padding:18px 0}</style>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#f8f4ef" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Trace Note" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-</head><body><h1>Trace Note AI Report</h1>${cats.map(c=>`<section><h2>${escapeHtml(c.name)}</h2><p><b>Why this category:</b> ${escapeHtml(c.reason||'')}</p><p><b>Progress trace:</b> ${escapeHtml(c.journey||'')}</p><p><b>Deadline review:</b> ${escapeHtml(c.deadline_review||'')}</p><p><b>Reusable insight:</b> ${escapeHtml(c.reusable_experience||'')}</p><p><b>Next suggestion:</b> ${escapeHtml(c.next_suggestions||'')}</p><p><b>Related active tasks:</b> ${escapeHtml((c.current_links||[]).join('; ')||'None')}</p><p><b>Completed tasks:</b></p><ul>${(c.completed_items||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></section>`).join('')}
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./service-worker.js').catch(function (err) {
-          console.log('Service worker registration failed:', err);
-        });
-      });
-    }
-  </script>
-</body></html>`;
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#f8f4ef">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Trace Note">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+</head><body><h1>Trace Note AI Report</h1>${cats.map(c=>`<section><h2>${escapeHtml(c.name)}</h2><p><b>Why this category:</b> ${escapeHtml(c.reason||'')}</p><p><b>Progress trace:</b> ${escapeHtml(c.journey||'')}</p><p><b>Deadline review:</b> ${escapeHtml(c.deadline_review||'')}</p><p><b>Reusable insight:</b> ${escapeHtml(c.reusable_experience||'')}</p><p><b>Next suggestion:</b> ${escapeHtml(c.next_suggestions||'')}</p><p><b>Related active tasks:</b> ${escapeHtml((c.current_links||[]).join('; ')||'None')}</p><p><b>Completed tasks:</b></p><ul>${(c.completed_items||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></section>`).join('')}</body></html>`;
 }
 function exportWord(scope){if(!state.analysis)return toast('Generate a report first'); const html=buildReportHtml(scope); const blob=new Blob(['\ufeff',html],{type:'application/msword'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`TraceNote_${scope==='category'?state.selectedCategory:'All'}_Report.doc`; a.click(); URL.revokeObjectURL(a.href)}
 function exportPDF(scope){if(!state.analysis)return toast('Generate a report first'); const w=window.open('','_blank'); w.document.write(buildReportHtml(scope)); w.document.close(); setTimeout(()=>w.print(),300)}
@@ -652,14 +635,14 @@ if(sortButton){ sortButton.addEventListener('pointerup', e=>{ e.preventDefault()
 render();
 </script>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./service-worker.js').catch(function (err) {
-          console.log('Service worker registration failed:', err);
-        });
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./service-worker.js').catch(function (err) {
+        console.log('Service worker registration failed:', err);
       });
-    }
-  </script>
+    });
+  }
+</script>
 </body>
 </html>

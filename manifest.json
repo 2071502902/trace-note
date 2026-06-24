@@ -1,15 +1,15 @@
 {
   "name": "Trace Note",
   "short_name": "Trace Note",
-  "description": "A mobile-first task notebook that traces completed work into reusable insights.",
+  "description": "A focused task tracing app with AI review.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f8f4ef",
   "theme_color": "#f8f4ef",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {"src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
   ]
 }
